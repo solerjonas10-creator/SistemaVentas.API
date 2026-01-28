@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi;
 using SistemaVentas.API.Data;
 
 
