@@ -5,22 +5,22 @@ namespace SistemaVentas.API.Models;
 
 public partial class Producto
 {
-    public decimal Id { get; set; }
+    public int Id { get; set; } 
 
     public string Descripcion { get; set; } = null!;
 
-    public decimal? PrecioCompra { get; set; }
+    public decimal? PrecioCompra { get; set; } = 0;
 
     public decimal? PrecioVenta { get; set; }
 
-    public string? Iva { get; set; }
+    public string? Iva { get; set; } = "10";
 
     /// AGREGADO DE MANERA PRELIMINAR HASTA TENER TABLA ALMACENES Y PODER CREAR UNA TABLA COMPUESTA
-    public decimal? Stock { get; set; }
+    public decimal? Stock { get; set; } = 0;
 
-    public decimal Activo { get; set; }
+    public int Activo { get; set; } = 1;
 
-    public DateTime? Registrado { get; set; }
+    public DateTime? Registrado { get; set; } = DateTime.Now;
 
     public virtual ICollection<DetalleVenta> DetalleVenta { get; set; } = new List<DetalleVenta>();
 }
