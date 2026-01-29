@@ -5,21 +5,21 @@ namespace SistemaVentas.API.Models;
 
 public partial class Venta
 {
-    public decimal Id { get; set; }
+    public int Id { get; set; }
 
-    public decimal NroVenta { get; set; }
+    public int NroVenta { get; set; }
 
-    public DateTime Fecha { get; set; }
+    public DateTime Fecha { get; set; } = DateTime.Now;
 
     public string Condicion { get; set; } = null!;
 
-    public decimal CantCuotas { get; set; }
+    public int CantCuotas { get; set; } = 1;
 
-    public decimal IntervaloDias { get; set; }
+    public int IntervaloDias { get; set; } = 0;
 
-    public decimal IdCliente { get; set; }
+    public int IdCliente { get; set; }
 
-    public string Estado { get; set; } = null!;
+    public string Estado { get; set; } = "PENDIENTE";
 
     public virtual ICollection<DetalleVenta> DetalleVenta { get; set; } = new List<DetalleVenta>();
 
