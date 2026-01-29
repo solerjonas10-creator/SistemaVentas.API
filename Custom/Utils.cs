@@ -15,7 +15,7 @@ namespace SistemaVentas.API.Custom
             _configuration = configuration;
         }
 
-        public string encriptarSHA256(strign texto)
+        public string encriptarSHA256(string texto)
         {
             using (SHA256 sha256Hash = SHA256.Create())
             {
