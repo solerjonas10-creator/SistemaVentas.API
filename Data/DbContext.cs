@@ -10,19 +10,17 @@ namespace SistemaVentas.API.Data
         }
 
         public virtual DbSet<Cliente> CLIENTES { get; set; }
-
         public virtual DbSet<DetalleVenta> DETALLE_VENTAS { get; set; }
-
         public virtual DbSet<Producto> PRODUCTOS { get; set; }
-
         public virtual DbSet<Venta> VENTAS { get; set; }
+        public virtual DbSet<Usuario> USUARIOS { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Producto>(eb =>
             {
                 eb.ToTable("PRODUCTOS");
-                eb.HasKey(p => p.Id);
                 eb.Property(p => p.Id).HasColumnName("ID");
                 eb.Property(p => p.Descripcion).HasColumnName("DESCRIPCION");
                 eb.Property(p => p.PrecioCompra).HasColumnName("PRECIO_COMPRA");
@@ -37,7 +35,6 @@ namespace SistemaVentas.API.Data
             modelBuilder.Entity<Cliente>(eb =>
             {
                 eb.ToTable("CLIENTES");
-                eb.HasKey(c => c.Id);
                 eb.Property(c => c.Id).HasColumnName("ID");
                 eb.Property(c => c.Nombres).HasColumnName("NOMBRES");
                 eb.Property(c => c.Apellidos).HasColumnName("APELLIDOS");
@@ -53,7 +50,6 @@ namespace SistemaVentas.API.Data
             modelBuilder.Entity<Venta>(eb =>
             {
                 eb.ToTable("VENTAS");
-                eb.HasKey(v => v.Id);
                 eb.Property(v => v.Id).HasColumnName("ID");
                 eb.Property(v => v.IdCliente).HasColumnName("CLIENTE_ID");
                 eb.Property(v => v.NroVenta).HasColumnName("NRO_VENTA");
@@ -63,6 +59,23 @@ namespace SistemaVentas.API.Data
                 eb.Property(v => v.IntervaloDias).HasColumnName("INTERVALO_DIAS");
                 eb.Property(v => v.Estado).HasColumnName("ESTADO");
                 eb.HasKey(v => v.Id);
+            });
+
+            modelBuilder.Entity<Usuario>(eb =>
+            {
+                eb.ToTable("USUARIOS");
+                eb.HasKey(u => u.Id);
+                eb.Property(u => u.Id).HasColumnName("ID");
+                eb.Property(u => u.NombreUsuario).HasColumnName("NOMBRE_USUARIO");
+                eb.Property(u => u.Correo).HasColumnName("CORREO");
+                eb.Property(u => u.Clave).HasColumnName("CLAVE");
+                eb.Property(u => u.Rol).HasColumnName("ROL");
+                eb.Property(u => u.NroDoc).HasColumnName("NRO_DOC");
+                eb.Property(u => u.Telefono).HasColumnName("TELEFONO");
+                eb.Property(u => u.Direccion).HasColumnName("DIRECCION");
+                eb.Property(u => u.FechaNacimiento).HasColumnName("FECHA_NACIMIENTO");
+                eb.Property(u => u.Activo).HasColumnName("ACTIVO");
+                eb.Property(u => u.Registrado).HasColumnName("REGISTRADO");
             });
         }
     }
