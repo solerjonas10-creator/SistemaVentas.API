@@ -5,6 +5,7 @@ using System.Text;
 using SistemaVentas.API.Custom;
 using SistemaVentas.API.Data;
 using SistemaVentas.API.Middleware;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +44,16 @@ builder.Services.AddCors(options =>
         app.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
+
+builder.Host.UseSerilog((contexto, loggerConfigurer) => 
+loggerConfigurer.MinimumLevel.Debug()
+    .Enrich.WithThreadId()
+    .Enrich.WithMachineName()
+    .Enrich.WithEnvironmentName()
+    .Enrich.FromLogContext()
+    .Enrich.WithProperty("services", "SistemaVentas.API")
+    .WriteTo.Seq("http://localhost:5341/")
+);
 
 var app = builder.Build();
 
