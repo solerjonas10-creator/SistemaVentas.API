@@ -22,7 +22,7 @@ namespace SistemaVentas.API.Controllers
             _context = context;
         }
 
-        [HttpGet("{id}/Read")]
+        [HttpGet("Read/{id}")]
         public async Task<IActionResult> Read(int id)
         {
             var producto = await _context.PRODUCTOS.FindAsync(id);
@@ -30,7 +30,8 @@ namespace SistemaVentas.API.Controllers
             return Ok(producto);
         }
 
-        [HttpPost] 
+        [HttpPost]
+        [Route("Create")]
         public async Task<IActionResult> Create([FromBody] Producto producto)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -52,7 +53,7 @@ namespace SistemaVentas.API.Controllers
             return CreatedAtAction(nameof(Read), new { id = producto.Id }, producto);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] Producto productomod)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -82,10 +83,10 @@ namespace SistemaVentas.API.Controllers
 
             await _context.SaveChangesAsync();
 
-            return Ok(producto);
+            return Ok(new { message = "Producto actualizado.", producto });
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var producto = await _context.PRODUCTOS.FindAsync(id);
@@ -94,9 +95,7 @@ namespace SistemaVentas.API.Controllers
             _context.PRODUCTOS.Remove(producto);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return Ok(new { message = "Producto eliminado." });
         }
     }
-
-    
 }

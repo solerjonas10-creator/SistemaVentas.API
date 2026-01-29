@@ -19,9 +19,7 @@ public partial class Cliente
 
     public string? Direccion { get; set; }
 
-    public int Activo { get; set; }
+    public int Activo { get; set; } = 1;
 
     public DateTime? Registrado { get; set; } = DateTime.Now;
-
-    public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 }
