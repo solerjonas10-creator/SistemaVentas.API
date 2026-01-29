@@ -4,11 +4,14 @@ using SistemaVentas.API.Data;
 using SistemaVentas.API.Models;
 using System.ComponentModel.DataAnnotations;
 using SistemaVentas.API.Validators;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 
 namespace SistemaVentas.API.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ProductoController : ControllerBase
     {
@@ -19,8 +22,7 @@ namespace SistemaVentas.API.Controllers
             _context = context;
         }
 
-
-        [HttpGet("{id}")]
+        [HttpGet("{id}/Read")]
         public async Task<IActionResult> Read(int id)
         {
             var producto = await _context.PRODUCTOS.FindAsync(id);

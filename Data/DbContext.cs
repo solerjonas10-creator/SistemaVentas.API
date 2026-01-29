@@ -65,7 +65,7 @@ namespace SistemaVentas.API.Data
             {
                 eb.ToTable("USUARIOS");
                 eb.HasKey(u => u.Id);
-                eb.Property(u => u.Id).HasColumnName("ID");
+                eb.Property(u => u.Id).HasColumnName("ID").HasDefaultValueSql("USUARIOS_SEQ.NEXTVAL").ValueGeneratedOnAdd(); ;
                 eb.Property(u => u.NombreUsuario).HasColumnName("NOMBRE_USUARIO");
                 eb.Property(u => u.Correo).HasColumnName("CORREO");
                 eb.Property(u => u.Clave).HasColumnName("CLAVE");
