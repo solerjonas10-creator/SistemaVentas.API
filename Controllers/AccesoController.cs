@@ -74,10 +74,10 @@ namespace SistemaVentas.API.Controllers
 
         [HttpPost]
         [Route("Login")]
-        public async Task<IActionResult> Login(UsuarioDTO usuarioDTO)
+        public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
             var validator = new LoginValidator();
-            var resultado = validator.Validate(usuarioDTO);
+            var resultado = validator.Validate(loginDTO);
             if (resultado.IsValid == false)
             {
                 foreach (var error in resultado.Errors)
@@ -89,8 +89,8 @@ namespace SistemaVentas.API.Controllers
 
             var usuarioEncontrado = await _context.USUARIOS
                 .Where(u =>
-                    u.Correo == usuarioDTO.Correo &&
-                    u.Clave == _utils.encriptarSHA256(usuarioDTO.Clave) &&
+                    u.Correo == loginDTO.Correo &&
+                    u.Clave == _utils.encriptarSHA256(loginDTO.Clave) &&
                     u.Activo == 1
                 ).FirstOrDefaultAsync();
 

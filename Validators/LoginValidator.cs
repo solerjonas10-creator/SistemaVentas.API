@@ -3,7 +3,7 @@ using SistemaVentas.API.Models.DTOs;
 
 namespace SistemaVentas.API.Validators
 {
-    public class LoginValidator : AbstractValidator<UsuarioDTO>
+    public class LoginValidator : AbstractValidator<LoginDTO>
     {
         public LoginValidator() 
         { 
