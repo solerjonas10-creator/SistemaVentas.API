@@ -6,7 +6,8 @@ namespace SistemaVentas.API.Validators
 {
     public class ProductoValidator : AbstractValidator<Producto>
     {
-        public ProductoValidator() {
+        public ProductoValidator() 
+        {
             List<string> iva = new List<string>() { "0", "5", "10" };
 
             RuleFor(producto => producto.Descripcion)

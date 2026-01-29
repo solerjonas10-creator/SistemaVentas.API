@@ -5,7 +5,7 @@ namespace SistemaVentas.API.Models;
 
 public partial class Cliente
 {
-    public decimal Id { get; set; }
+    public int Id { get; set; }
 
     public string Nombres { get; set; } = null!;
 
@@ -19,9 +19,9 @@ public partial class Cliente
 
     public string? Direccion { get; set; }
 
-    public decimal Activo { get; set; }
+    public int Activo { get; set; }
 
-    public DateTime? Registrado { get; set; }
+    public DateTime? Registrado { get; set; } = DateTime.Now;
 
     public virtual ICollection<Venta> Venta { get; set; } = new List<Venta>();
 }
