@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SistemaVentas.API.Models;
 
 public partial class Producto
 {
-    public int Id { get; set; } 
+    public int Id { get; set; }
 
     public string Descripcion { get; set; } = null!;
 
@@ -21,6 +22,4 @@ public partial class Producto
     public int Activo { get; set; } = 1;
 
     public DateTime? Registrado { get; set; } = DateTime.Now;
-
-    public virtual ICollection<DetalleVenta> DetalleVenta { get; set; } = new List<DetalleVenta>();
 }

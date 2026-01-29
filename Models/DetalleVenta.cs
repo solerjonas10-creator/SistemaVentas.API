@@ -5,15 +5,16 @@ namespace SistemaVentas.API.Models;
 
 public partial class DetalleVenta
 {
-    public decimal IdVenta { get; set; }
+    public int Id { get; set; }
+    public int IdVenta { get; set; }
 
-    public decimal IdProducto { get; set; }
+    public int IdProducto { get; set; }
 
-    public decimal Cantidad { get; set; }
+    public int Cantidad { get; set; }
 
     public decimal Precio { get; set; }
 
-    public virtual Producto IdProductoNavigation { get; set; } = null!;
+    public virtual Producto? IdProductoNavigation { get; set; }
 
-    public virtual Venta IdVentaNavigation { get; set; } = null!;
+    public virtual Venta? IdVentaNavigation { get; set; }
 }
