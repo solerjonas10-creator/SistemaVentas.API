@@ -21,6 +21,7 @@ namespace SistemaVentas.API.Controllers
         }
 
         [HttpGet("Read/{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult> Read(int id)
         {
             var venta = await _context.VENTAS

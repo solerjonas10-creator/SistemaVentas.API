@@ -19,6 +19,7 @@ namespace SistemaVentas.API.Controllers
         }
 
         [HttpGet("Read/{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> Read(int id)
         {
             var cliente = await _context.CLIENTES.FindAsync(id);
