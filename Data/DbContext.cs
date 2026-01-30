@@ -18,6 +18,14 @@ namespace SistemaVentas.API.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasSequence<int>("VENTAS_SEQ")
+                .StartsAt(1)
+                .IncrementsBy(1);
+
+            modelBuilder.HasSequence<int>("DETALLE_VENTAS_SEQ")
+                .StartsAt(1)
+                .IncrementsBy(1);
+
             modelBuilder.Entity<Producto>(eb =>
             {
                 eb.ToTable("PRODUCTOS");
@@ -50,8 +58,8 @@ namespace SistemaVentas.API.Data
             modelBuilder.Entity<Venta>(eb =>
             {
                 eb.ToTable("VENTAS");
-                eb.Property(v => v.Id).HasColumnName("ID");
-                eb.Property(v => v.IdCliente).HasColumnName("CLIENTE_ID");
+                eb.Property(v => v.Id).HasColumnName("ID").HasDefaultValueSql("VENTAS_SEQ.NEXTVAL").ValueGeneratedOnAdd();
+                eb.Property(v => v.IdCliente).HasColumnName("ID_CLIENTE");
                 eb.Property(v => v.NroVenta).HasColumnName("NRO_VENTA");
                 eb.Property(v => v.Fecha).HasColumnName("FECHA");
                 eb.Property(v => v.Condicion).HasColumnName("CONDICION");
@@ -61,11 +69,22 @@ namespace SistemaVentas.API.Data
                 eb.HasKey(v => v.Id);
             });
 
+            modelBuilder.Entity<DetalleVenta>(eb =>
+            {
+                eb.ToTable("DETALLE_VENTAS");
+                eb.Property(d => d.Id).HasColumnName("ID").HasDefaultValueSql("DETALLE_VENTA_SEQ.NEXTVAL").ValueGeneratedOnAdd();
+                eb.Property(d => d.IdVenta).HasColumnName("ID_VENTA");
+                eb.Property(d => d.IdProducto).HasColumnName("ID_PRODUCTO");
+                eb.Property(d => d.Cantidad).HasColumnName("CANTIDAD");
+                eb.Property(d => d.Precio).HasColumnName("PRECIO");
+                eb.HasKey(d => d.Id);
+            });
+
             modelBuilder.Entity<Usuario>(eb =>
             {
                 eb.ToTable("USUARIOS");
                 eb.HasKey(u => u.Id);
-                eb.Property(u => u.Id).HasColumnName("ID").HasDefaultValueSql("USUARIOS_SEQ.NEXTVAL").ValueGeneratedOnAdd(); ;
+                eb.Property(u => u.Id).HasColumnName("ID").HasDefaultValueSql("USUARIOS_SEQ.NEXTVAL").ValueGeneratedOnAdd();
                 eb.Property(u => u.NombreUsuario).HasColumnName("NOMBRE_USUARIO");
                 eb.Property(u => u.Correo).HasColumnName("CORREO");
                 eb.Property(u => u.Clave).HasColumnName("CLAVE");
