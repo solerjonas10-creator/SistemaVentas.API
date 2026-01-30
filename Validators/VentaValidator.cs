@@ -7,6 +7,10 @@ namespace SistemaVentas.API.Validators
     {
         public VentaValidator() 
         { 
+            RuleFor(venta => venta.IdCliente)
+                .NotEmpty().WithMessage("El campo IdCliente no debe estar vacio.")
+                .GreaterThan(0).WithMessage("El campo IdCliente debe ser mayor a 0.");
+
             RuleFor(venta => venta.Condicion)
                 .NotEmpty().WithMessage("El campo Condicion es obligatorio.")
                 .Must(condicion => condicion == "CONTADO" || condicion == "CREDITO")
