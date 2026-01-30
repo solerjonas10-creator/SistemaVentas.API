@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace SistemaVentas.API.Models;
 
 public partial class Venta
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public int NroVenta { get; set; }
 
     public DateTime Fecha { get; set; } = DateTime.Now;
 
-    public string Condicion { get; set; } = null!;
+    public string Condicion { get; set; } = "CONTADO";
 
     public int CantCuotas { get; set; } = 1;
 
@@ -21,7 +22,6 @@ public partial class Venta
 
     public string Estado { get; set; } = "PENDIENTE";
 
-    public virtual ICollection<DetalleVenta> DetalleVenta { get; set; } = new List<DetalleVenta>();
-
-    public virtual Cliente IdClienteNavigation { get; set; } = null!;
+    [JsonPropertyName("detalleVenta")]
+    public virtual ICollection<DetalleVenta> DETALLE_VENTAS { get; set; } = new List<DetalleVenta>();
 }
