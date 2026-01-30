@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using Serilog;
 using SistemaVentas.API.Custom;
 using SistemaVentas.API.Data;
 using SistemaVentas.API.Middleware;
-using Serilog;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,12 @@ builder.Services.AddAuthentication(config => {
     };
 });
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+       .AddJsonOptions(options =>
+       {
+           options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+           options.JsonSerializerOptions.WriteIndented = true;
+       });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
